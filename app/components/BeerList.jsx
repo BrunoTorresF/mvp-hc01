@@ -1,5 +1,5 @@
 import React from 'react';
-import BeerEntry from 'BeerEntry.jsx';
+import BeerEntry from './BeerEntry.jsx';
 
 const BeerList = (props) => (
   <div className="list">
