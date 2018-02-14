@@ -15,8 +15,12 @@ class App extends React.Component {
         {beer: 'Black Sheep Ale', style: 'Brown Ale', beer_id: 4284}
       ]
     }
-
+    //bind component methods here
   }
+  //Component methods go here
+  //componentDidMount - check status in React v16
+  //executeSearch()
+  //fetchPreviousSearch()
   render(){
     return (
       <div>

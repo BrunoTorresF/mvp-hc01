@@ -6,12 +6,12 @@ class Search extends React.Component {
     this.state = {
       input: ''
     }
-    
+
   }
   render(){
     return (
       <div>
-        Search: <input></input><br/>
+        Search: <input placeholder="Enter search term"></input>
       <button>Find Me Some Beer</button>
       </div>
     );
