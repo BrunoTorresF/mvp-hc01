@@ -6,7 +6,7 @@ const app = express();
 const router = express.Router();
 const port = 3000;
 
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 //CORS Headers
@@ -23,7 +23,8 @@ app.listen(port, function() {
 });
 
 app.get('/', (req, res) => {
-  //build out get method
+  console.log('Got here')
+  res.render('index')
 })
 
 app.post('/', (req, res) => {
