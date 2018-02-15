@@ -1,22 +1,20 @@
 const mongoose = require('mongoose');
 
-const QuerySchema = new mongoose.Schema({
-  query: {
-    type: String
+const BeerSchema = new mongoose.Schema({
+  name: {
+    type: String,
     unique: true,
     required: true,
     trim: true
-  },
-  results: {
-    type: String,
-    required: true
   }
 })
 
-const NewQuery = mongoose.model('NewQuery', QuerySchema);
+module.exports = mongoose.model('Beer', BeerSchema);
 
-NewQuery.create(query, (err, query) => {})
+//NewQuery.create(query}, (err, query) => {
+//  if (err) console.log(err);
+//})
 
-NewQuery.findOne({ query: }, (err, result) => {});
-
-module.exports = NewQuery;
+//NewQuery.find({ 'query': query }, (err, result) => {
+//  if (err) console.log(err);
+//});

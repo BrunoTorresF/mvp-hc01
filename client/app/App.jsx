@@ -9,23 +9,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [
-        {beer: 'Sam Adams', style: 'American IPA', beer_id: 2546},
-        {beer: 'Kronenbourg 1664', style: 'Pale Lager', beer_id: 1358},
-        {beer: 'Pilsner Urqell', style: 'Czech-style Lager', beer_id: 4879},
-        {beer: 'Estrella Damm', style: 'Lager', beer_id: 2234},
-        {beer: 'Black Sheep Ale', style: 'Brown Ale', beer_id: 4284}
-      ]
+      results: []
     }
     //bind component methods here
     this.executeSearch = this.executeSearch.bind(this);
   }
   //Component methods go here
-  //componentDidMount - check status in React v16
+  componentDidMount(){
+    this.setState({
+      results: []
+    })
+  }
 
   //executeSearch()
   executeSearch(query) {
-    axios.get('/search').then(res => {
+    axios.post('/save', {
+      data: {query: query}
+    })
+    .then(res => {
       this.setState({
         results: res
       })

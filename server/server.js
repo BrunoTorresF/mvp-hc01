@@ -2,26 +2,44 @@ const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const Beers = require('../db/model.js');
+const db = require('../db/config.js');
 
 const app = express();
 const router = express.Router();
 const port = 3000;
-const routes = require('./routes.js')
+//const routes = require('./routes.js')
 
 app.use(cors());
 app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.options('baseUrl', cors())
-
-app.use('/*', routes);
+//app.options('baseUrl', cors())
+//app.use('/*', routes);
 
 app.listen(port, function() {
   console.log(`server running on port ${port}`);
 });
 
+app.get('/save', (req, res, next) => {
+  Beers.find((err, beers) => {
+    if (err) res.sendStatus(500);
+    res.json(beers)
+  });
+})
+
+app.post('/save', (req, res, next) => {
+  let beer = new Beers();
+  beer.name = req.body.query;
+  beer.save((err) => {
+    if (err) {
+      res.send(err)
+    }
+    res.json({message: 'Beer Successfully Saved'});
+  });
+});
 //CORS Headers
 /*app.options('search', (req, res, next) => {
 res.header('Access-Control-Allow-Origin', '*');
