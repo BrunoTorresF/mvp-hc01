@@ -25,18 +25,11 @@ class App extends React.Component {
 
   //executeSearch()
   executeSearch(query) {
-    axios.post(`${this.props.url}`, {
-      "function": "beer",
-      "dev_key": window.BS_API_KEY,
-      "search_term": query,
-      "limit" : "5"
+    axios.get('/search').then(res => {
+      this.setState({
+        results: res
+      })
     })
-    .then(res => {
-      this.setState({ results: res });
-    })
-    .catch(err => {
-      console.error(err);
-    });
   }
   //fetchPreviousSearch()
   render(){
@@ -50,4 +43,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App url={"http://www.thebeerspot.com/api/search"}/> , document.getElementById('app'));
+ReactDOM.render(<App url={"http://api.brewerydb.com/v2/"}/> , document.getElementById('app'));

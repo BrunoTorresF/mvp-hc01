@@ -1,27 +1,11 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongod://localhost:');
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017');
+mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function(){
-  let testSchema = new mongoose.Schema({
-    name: String
-  });
+  console.log('Mongodb connection open');
 });
 
-const SearchSchema = new mongoose.Schema({
-  query: {
-    type: String
-    unique: true,
-    required: true,
-    trim: true
-  },
-  results: {
-    type: JSON,
-    required: true
-  }
-})
-
-let NewSearch = mongoose.model('Query', SearchSchema);
-module.exports = Search;
+module.exports = db;
