@@ -7,6 +7,7 @@ const cors = require('cors')
 const app = express();
 const router = express.Router();
 const port = 3000;
+const routes = require('./routes.js')
 
 app.use(cors());
 app.use(express.static(__dirname + '/../client'));
@@ -14,6 +15,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.options('baseUrl', cors())
+
+app.use('/*', routes);
 
 app.listen(port, function() {
   console.log(`server running on port ${port}`);
