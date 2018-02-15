@@ -29,7 +29,7 @@ class App extends React.Component {
       "function": "beer",
       "dev_key": window.BS_API_KEY,
       "search_term": query,
-      "limit" : "10"
+      "limit" : "5"
     })
     .then(res => {
       this.setState({ results: res });

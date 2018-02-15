@@ -1,11 +1,27 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongod://localhost/test');
+mongoose.connect('mongod://localhost:');
 
-let db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
-  let testSchema = mongoose.Schema({
+  let testSchema = new mongoose.Schema({
     name: String
   });
 });
+
+const SearchSchema = new mongoose.Schema({
+  query: {
+    type: String
+    unique: true,
+    required: true,
+    trim: true
+  },
+  results: {
+    type: JSON,
+    required: true
+  }
+})
+
+let NewSearch = mongoose.model('Query', SearchSchema);
+module.exports = Search;
