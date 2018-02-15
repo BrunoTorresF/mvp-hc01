@@ -6,13 +6,25 @@ class Search extends React.Component {
     this.state = {
       input: ''
     }
-
+    this.handleInput = this.handleInput.bind(this);
+    this.search = this.search.bind(this);
+  }
+  handleInput(event){
+    this.setState({
+      input: event.target.value
+    })
+  }
+  search(){
+    this.props.executeSearch(this.state.input);
+    this.setState({
+      input: ''
+    })
   }
   render(){
     return (
       <div>
-        Search: <input placeholder="Enter search term"></input>
-      <button>Find Me Some Beer</button>
+        Search: <input onChange={this.handleInput} placeholder="Enter search term" value={this.state.input}></input>
+      <button onClick={this.search}>Find Me Some Beer</button>
       </div>
     );
   }
