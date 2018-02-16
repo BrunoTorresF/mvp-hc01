@@ -17,9 +17,9 @@ var selectAll = function(cb) {
   });
 };
 
-var insertOne = function(description, style, cb) {
-  con.query('INSERT INTO beers (description, style) VALUES (?, ?)',
-    [description, style], (err, results, fields) => {
+var insertOne = function(beer, style, cb) {
+  con.query('INSERT INTO beers (beer, style) VALUES (?, ?)',
+    [beer, style], (err, results, fields) => {
       if(err) {
         cb(err, null);
       } else {

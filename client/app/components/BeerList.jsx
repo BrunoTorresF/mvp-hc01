@@ -3,7 +3,7 @@ import BeerEntry from './BeerEntry.jsx';
 
 const BeerList = (props) => (
   <div className="list">
-    {props.results.map((beer, id) => <BeerEntry beer={beer} key={id}/>)}
+    {props.results.map((beer, style, index) => <BeerEntry beer={beer} style={style} key={index}/>)}
   </div>
 )
 

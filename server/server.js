@@ -22,14 +22,14 @@ app.get('/beers', function(req, res){
 //handle post requests to groceries
 app.post('/beers', function(req, res){
   //update data object with new object from my req.body
-  let style    = req.body.style;
-  let description = req.body.description;
+  let style = req.body.style;
+  let beer = req.body.beer;
   //send the updated data object back
 
-  if(!description) {
+  if(!beer) {
     res.sendStatus(400);
   } else {
-    database.insertOne(description, style, (err, results) => {
+    database.insertOne(beer, style, (err, results) => {
       if (err) {
         res.sendStatus(500);
       } else {
