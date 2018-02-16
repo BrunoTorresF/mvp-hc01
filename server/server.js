@@ -6,6 +6,8 @@ const cors = require('cors');
 const Beers = require('../db/model.js');
 const db = require('../db/config.js');
 
+const dbConnect = mongoose.connect('mongodb://localhost:27017/beerlist', ['beers']);
+console.log(dbConnect)
 const app = express();
 const router = express.Router();
 const port = 3000;
@@ -24,16 +26,16 @@ app.listen(port, function() {
 });
 
 app.get('/save', (req, res, next) => {
-  Beers.find((err, beers) => {
+  dbConnect.beers.find((err, beers) => {
     if (err) res.sendStatus(500);
     res.json(beers)
   });
 })
 
 app.post('/save', (req, res, next) => {
-  let beer = new Beers();
-  beer.name = req.body.query;
-  beer.save((err) => {
+  let beer = req.body;
+  console.log(beer)
+  dbConnect.beers.save(beer, (err, beer) => {
     if (err) {
       res.send(err)
     }

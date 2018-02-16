@@ -4,13 +4,14 @@ const BeerSchema = new mongoose.Schema({
   name: {
     type: String,
     unique: true,
-    required: true,
+    //required: true,
     trim: true
   }
 })
 
-module.exports = mongoose.model('Beer', BeerSchema);
+let Beers = mongoose.model('Beers', BeerSchema);
 
+module.exports = Beers;
 //NewQuery.create(query}, (err, query) => {
 //  if (err) console.log(err);
 //})

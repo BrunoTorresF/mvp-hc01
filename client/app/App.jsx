@@ -13,26 +13,34 @@ class App extends React.Component {
     }
     //bind component methods here
     this.executeSearch = this.executeSearch.bind(this);
+    this.getBeerList = this.getBeerList.bind(this);
   }
   //Component methods go here
   componentDidMount(){
-    this.setState({
-      results: []
-    })
+    this.getBeerList();
   }
 
   //executeSearch()
-  executeSearch(query) {
+  executeSearch(input) {
     axios.post('/save', {
-      data: {query: query}
+      name: input
     })
-    .then(res => {
-      this.setState({
-        results: res
-      })
+    .then(() => {
+      this.getBeerList();
     })
   }
   //fetchPreviousSearch()
+  getBeerList() {
+    axios.get('/save')
+    .then(res => {
+      console.log(res)
+      this.setState({ results: res });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   render(){
     return (
       <div>
