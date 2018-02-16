@@ -12,7 +12,7 @@ class App extends React.Component {
       results: []
     }
     //bind component methods here
-    this.executeSearch = this.executeSearch.bind(this);
+    this.saveBeer = this.saveBeer.bind(this);
     this.getBeerList = this.getBeerList.bind(this);
   }
   //Component methods go here
@@ -21,35 +21,41 @@ class App extends React.Component {
   }
 
   //executeSearch()
-  executeSearch(input) {
-    axios.post('/save', {
-      name: input
-    })
-    .then(() => {
+  saveBeer(description, style) {
+    $.ajax({
+      method: "POST",
+      url: "/beers",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        description: description,
+        style: style
+      })
+    }).done(() => {
       this.getBeerList();
-    })
-  }
-  //fetchPreviousSearch()
-  getBeerList() {
-    axios.get('/save')
-    .then(res => {
-      console.log(res)
-      this.setState({ results: res });
-    })
-    .catch(err => {
-      console.log(err);
     });
   }
 
+  getBeerList() {
+    $.ajax({
+      url: '/beers',
+      method: 'GET',
+      success: (results) => {
+        this.setState({list: results});
+      },
+      error: (xhr, err) => {
+        console.log('err', err);
+      }
+    })
+}
   render(){
     return (
       <div>
         <h1> Find a Beer </h1>
-        <Search executeSearch={this.executeSearch}/>
+        <Search saveBeer={this.saveBeer}/>
         <BeerList results={this.state.results}/>
       </div>
     )
   }
 }
 
-ReactDOM.render(<App url={"http://api.brewerydb.com/v2/"}/> , document.getElementById('app'));
+ReactDOM.render(<App /> , document.getElementById('app'));

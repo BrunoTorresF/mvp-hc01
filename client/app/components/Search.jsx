@@ -4,18 +4,20 @@ class Search extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      input: ''
+      description: '',
+      style: ''
     }
     this.handleInput = this.handleInput.bind(this);
-    this.search = this.search.bind(this);
+    this.save = this.save.bind(this);
   }
   handleInput(event){
     this.setState({
-      input: event.target.value
+      description: event.target.value,
+      style: event.target.value
     })
   }
-  search(){
-    this.props.executeSearch(this.state.input);
+  save(){
+    this.props.saveBeer(this.state.description, this.state.style);
     this.setState({
       input: ''
     })
@@ -23,8 +25,9 @@ class Search extends React.Component {
   render(){
     return (
       <div>
-        Search: <input onChange={this.handleInput} placeholder="Enter search term" value={this.state.input}></input>
-      <button onClick={this.search}>Track My Beer</button>
+        Beer: <input onChange={this.handleInput} placeholder="Enter Beer" value={this.state.input}></input> <br/>
+        Style: <input onChange={this.handleInput} placeholder="Enter Beer" value={this.state.input}></input>
+      <button onClick={this.save}>Track My Beer</button>
       </div>
     );
   }
