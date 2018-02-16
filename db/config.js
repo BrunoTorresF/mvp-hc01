@@ -7,6 +7,18 @@ var con = mysql.createConnection({
   database: "beerList"
 });
 
+var createTable = () => {
+  con.query("DROP DATABASE IF EXISTS beerList", () => {}());
+  con.query('CREATE DATABASE beerList'){}();
+  con.query('USE beerList'){}();
+  con.query(`CREATE TABLE beers (
+    id int NOT NULL AUTO_INCREMENT,
+    style varchar(50) NOT NULL,
+    beer varchar(50) NOT NULL,
+    PRIMARY KEY (ID)
+  );`  ){}();
+};
+
 var selectAll = function(cb) {
   con.query('SELECT * FROM beers', (err, results, fields)=> {
     if(err) {

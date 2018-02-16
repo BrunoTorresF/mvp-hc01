@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client'));
 
+database.createTable();
 //handle get requests to groceries
 app.get('/beers', function(req, res){
   database.selectAll((err, results) => {
@@ -25,7 +26,6 @@ app.post('/beers', function(req, res){
   let style = req.body.style;
   let beer = req.body.beer;
   //send the updated data object back
-
   if(!beer) {
     res.sendStatus(400);
   } else {
